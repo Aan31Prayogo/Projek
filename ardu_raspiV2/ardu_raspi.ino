@@ -9,33 +9,24 @@ AF_DCMotor motor4(4);
 char command;
 Servo servo1;
 Servo servo2;
-int center=90
-int angle1,angle2;
-dwdadaw
+int angle1=95;
+int angle2=90;
 
 void forward()
 {
-  motor1.setSpeed(120); //Define maximum velocity
+  motor1.setSpeed(180); //Define maximum velocity
   motor1.run(FORWARD); //rotate the motor clockwise
-  motor2.setSpeed(200); //Define maximum velocity
+  motor2.setSpeed(180); //Define maximum velocity
   motor2.run(FORWARD); //rotate the motor clockwise
-  motor3.setSpeed(120); //Define maximum velocity
+  motor3.setSpeed(180); //Define maximum velocity
   motor3.run(FORWARD); //rotate the motor clockwise
-  motor4.setSpeed(200); //Define maximum velocity
+  motor4.setSpeed(180); //Define maximum velocity
   motor4.run(FORWARD); //rotate the motor clockwise
-}
-
-void full()
-{
-  motor1.setSpeed(175); //Define maximum velocity
-  motor1.run(FORWARD); //rotate the motor clockwise
-  motor2.setSpeed(255); //Define maximum velocity
-  motor2.run(FORWARD); //rotate the motor clockwise
 }
 
 void back()
 {
-  motor1.setSpeed(100); 
+  motor1.setSpeed(180); 
   motor1.run(BACKWARD); //rotate the motor counterclockwise
   motor2.setSpeed(180); 
   motor2.run(BACKWARD); //rotate the motor counterclockwise
@@ -47,26 +38,26 @@ void back()
 
 void right()
 {
-  motor1.setSpeed(225); //Define maximum velocity
+  motor1.setSpeed(150); //Define maximum velocity
   motor1.run(FORWARD); //rotate the motor clockwise
-  motor2.setSpeed(225); //Define maximum velocity
+  motor2.setSpeed(150); //Define maximum velocity
   motor2.run(BACKWARD); //rotate the motor clockwise
-  motor3.setSpeed(225); //Define maximum velocity
-  motor3.run(FORWARD); //rotate the motor clockwise
-  motor4.setSpeed(225); //Define maximum velocity
-  motor4.run(BACKWARD); //rotate the motor clockwise
+  motor3.setSpeed(150); //Define maximum velocity
+  motor3.run(BACKWARD); //rotate the motor clockwise
+  motor4.setSpeed(150); //Define maximum velocity
+  motor4.run(FORWARD); //rotate the motor clockwise
 }
 
 void left()
 { 
-  motor1.setSpeed(225); 
+  motor1.setSpeed(150); 
   motor1.run(BACKWARD); //rotate the motor counterclockwise
-  motor2.setSpeed(225); 
+  motor2.setSpeed(150); 
   motor2.run(FORWARD); //rotate the motor counterclockwise
-  motor3.setSpeed(225); 
-  motor3.run(BACKWARD); //rotate the motor counterclockwise
-  motor4.setSpeed(225); 
-  motor4.run(FORWARD); //rotate the motor counterclockwise
+  motor3.setSpeed(150); 
+  motor3.run(FORWARD); //rotate the motor counterclockwise
+  motor4.setSpeed(150); 
+  motor4.run(BACKWARD); //rotate the motor counterclockwise
 }
 
 void Stop()
@@ -87,8 +78,12 @@ void Pan_right(){
   servo1.write(angle1);
   if (angle1 >180){
     servo1.write(180);
+    angle1=180;
   }
   angle1=angle1;
+  Serial.print("angle1 =");
+  Serial.println(angle1);
+  
 }
 
 void Pan_left(){
@@ -96,9 +91,13 @@ void Pan_left(){
   angle1-=3;
   servo1.write(angle1);
   if (angle1 <0){
-    servo1.write(0)
+    servo1.write(0);
+    angle1=0;
   }
   angle1=angle1;
+  Serial.print("angle1 =");
+  Serial.println(angle1);
+
 }
 
 void Tilt_up(){
@@ -107,8 +106,11 @@ void Tilt_up(){
   servo2.write(angle2);
   if (angle2 >180){
     servo2.write(180);
+    angle2=180;
   }
   angle2=angle2;
+  Serial.print("angle2 =");
+  Serial.println(angle2);
 }
 
 void Tilt_down(){
@@ -117,17 +119,23 @@ void Tilt_down(){
   servo2.write(angle2);
   if (angle2<0){
     servo2.write(0);
+    angle2=0;
   }
   angle2=angle2;
+  Serial.print("angle2 =");
+  Serial.println(angle2);
+
 }
 
 void setup() 
 {
   // put your setup code here, to run once:
-  Serial.begin(9600);
-  servo1.attach(9);
-  servo2.attach(10);
-  servo1.write(center); servo2.write(center);
+  Serial.begin(115200);
+  servo1.attach(10);
+  servo2.attach(9);
+  servo1.write(angle1); servo2.write(angle2);
+  Serial.println("program Starting!!");
+  Serial.println("#####################################");
 }
 
 void loop()
@@ -160,22 +168,21 @@ void loop()
         break;
 
         case 'U':
-          Tilt_up();
-        break;
-
-        case 'D':
           Tilt_down();
         break;
 
+        case 'D':
+          Tilt_up();
+        break;
+
         case 'M':
-          Pan_right();
+          Pan_left();
         break;
 
         case 'N':
-          Pan_left();
+          Pan_right();
         break;
       }
     }
+  
 }  
-
-
