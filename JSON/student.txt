@@ -1,0 +1,19 @@
+{
+  "students" : [
+    {
+      "firstName" : "Jane",
+      "lastName" : "Doe",
+      "major" : "CENT"
+    },
+    {
+      "firstName" : "John",
+      "lastName" : "Doe",
+      "major" : "PHYS"
+    },
+    {
+      "firstName" : "Bill",
+      "lastName" : "Gates",
+      "major" : "ICS"
+    }
+  ]
+}
