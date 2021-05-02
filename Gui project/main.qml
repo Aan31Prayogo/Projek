@@ -1,14 +1,15 @@
-import QtQuick 2.0
 import QtQuick.Layouts 1.2
-import QtQuick.Controls 1.4
 import QtQml 2.12
+import QtQuick 2.6
+import QtQuick.Window 2.2
+import QtQuick.Controls 2.2
 
 ApplicationWindow{
     id:root
     x:600
     y:200
-    width: 480
-    height: 220
+    width: 640
+    height: 480
     visible: true
     //title: qsTr("Hello World")
     flags: Qt.FramelessWindowHint |
@@ -66,15 +67,17 @@ ApplicationWindow{
                 if(connect_count ==1)
                 {
                     text_connect.text="Connected"
-                    say_print();
+                    setfunction.start_serial()
 
                 }
 
                 else
                 {
                     text_connect.text="Disconnected"
-                    screen_.text = " "
+                    screen.text = " "
+                    setfunction.stop_serial()
                     connect_count = 0
+
                 }
 
             }
@@ -93,7 +96,7 @@ ApplicationWindow{
         y:85
         color: "whitesmoke"
         font.pixelSize: 14
-        text: qsTr("COM = COM8")
+        text: qsTr("COM = COM6")
         //font.family: fontStyle.medium
     }
 
@@ -108,22 +111,26 @@ ApplicationWindow{
     }
 
 
-    TextArea{
-        id: screen_
-        anchors.horizontalCenter: parent.horizontalCenter
-        y:100
-        width: 190
-        height: 100
-        font.pixelSize: 16
-        text: " "
+    ScrollView {
+            id: screen_view
+            anchors.centerIn: parent
+            width: 200;
+            height: 150
+            background: Rectangle {
+                anchors.fill: parent
+                border.color: "gray"
+            }
+
+            TextArea {
+                id: screen
+                wrapMode: TextArea.Wrap; selectByMouse: true;
+                font.pixelSize: 10
+                text:  ""
+            }
+        }
 
 
-    }
 
-    function say_print()
-    {
-        setfunction.serial_read()
-    }
 
     signal reLine (string str)
     Component.onCompleted: setfunction.serialChange.connect(reLine)
@@ -134,7 +141,7 @@ ApplicationWindow{
         target: root
         function onReLine(str)
         {
-            screen_.text = str
+            screen.text = str
         }
 
 
