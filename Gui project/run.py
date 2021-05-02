@@ -19,6 +19,8 @@ class SetFunction(QObject):
     #@pyqtSlot()
     def serial_read(self):
         global ser
+        global stop_thread
+        stop_thread=False
         ser=serial.Serial("COM6",9600)
         try:
             while 1:
@@ -28,6 +30,9 @@ class SetFunction(QObject):
                 #line=line.decode("utf-8")
                 print("Serial read =",line)
                 self.serialChange.emit(str(line))
+                if stop_thread:
+                    break
+
         except Exception as e:
             print("ERROR OCCURED",str(e))
             return False
@@ -43,8 +48,9 @@ class SetFunction(QObject):
     
     @pyqtSlot()
     def stop_serial(self):
-        global ser
-        ser.close()
+        #global ser
+        global stop_thread
+        stop_thread=True
 
 if __name__=="__main__":
     try:

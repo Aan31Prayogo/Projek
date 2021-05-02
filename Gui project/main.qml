@@ -5,6 +5,26 @@ import QtQuick.Window 2.2
 import QtQuick.Controls 2.2
 
 ApplicationWindow{
+
+    signal reLine (string str)
+    
+    Component.onCompleted: {
+        setfunction.serialChange.connect(reLine)
+    }
+    Component.onDestruction:{
+        setfunction.serialChange.disconnect(reLine)
+    } 
+
+
+    Connections{
+        target: root
+        function onReLine(str)
+        {
+            screen.text = str
+        }
+    }
+
+
     id:root
     x:600
     y:200
@@ -74,7 +94,7 @@ ApplicationWindow{
                 else
                 {
                     text_connect.text="Disconnected"
-                    screen.text = " "
+                    screen.text = "       "
                     setfunction.stop_serial()
                     connect_count = 0
 
@@ -132,20 +152,7 @@ ApplicationWindow{
 
 
 
-    signal reLine (string str)
-    Component.onCompleted: setfunction.serialChange.connect(reLine)
-    Component.onDestruction: setfunction.serialChange.disconnect(reLine)
-
-
-    Connections{
-        target: root
-        function onReLine(str)
-        {
-            screen.text = str
-        }
-
-
-    }
+  
 
 
 }
