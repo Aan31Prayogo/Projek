@@ -7,7 +7,7 @@ import QtQuick.Controls 2.2
 ApplicationWindow{
     property var com:""
     property var baudrate:""
-     property int connect_count:0
+    property int connect_count:0
 
     signal reLine (string str)
     
@@ -53,9 +53,10 @@ ApplicationWindow{
             id: bground_text
             text: qsTr("Dashboard")
             font.pixelSize: 24
+            font.wordSpacing: 0
             color: "#ffffff"
             font.letterSpacing: 2
-        }
+       }
 
         ComboBox {
             id: comboBox_port
@@ -65,18 +66,18 @@ ApplicationWindow{
             flat: false
             displayText:currentText
             editable: false
-            model: ListModel{
+          model: ListModel{
                 ListElement{
                text:"COM6"
-               com:"COM6"
+
             }
             ListElement{
                 text:"COM7"
-                com:"COM7"
+
             }
             ListElement{
                 text:"COM8"
-                com:"COM8"
+
             }
             }
 
@@ -85,22 +86,23 @@ ApplicationWindow{
             id: comboBox_baud
             x: 329
             y: 17
+            enabled: true
             font.weight: Font.Medium
             font.family: "Helvetica"
             displayText:currentText
             model: ListModel{
+                    ListElement{
+                    text:"4800"
+
+                }
                 ListElement{
-                text:"4800"
-                baudrate:"4800"
-            }
-            ListElement{
-                text:"9600"
-                baudrate:"9600"
-            }
-            ListElement{
-                text:"115200"
-                baudrate:"115200"
-            }
+                    text:"9600"
+
+                }
+                ListElement{
+                    text:"115200"
+
+                }
             }
 
         }
@@ -157,25 +159,6 @@ ApplicationWindow{
             }
 
         }
-    }
-
-    Text {
-        x:10
-        y:85
-        color: "whitesmoke"
-        font.pixelSize: 14
-        text: qsTr("COM = COM6")
-        //font.family: fontStyle.medium
-    }
-
-
-    Text {
-        x:10
-        y:105
-        font.pixelSize: 14
-        color: "whitesmoke"
-        text: qsTr("Baudrate = 9600")
-         //font.family: fontStyle.medium
     }
 
 
