@@ -20,7 +20,7 @@ ApplicationWindow{
         target: root
         function onReLine(str)
         {
-            screen.text = str
+            screen.append(str)
         }
     }
 
@@ -39,6 +39,7 @@ ApplicationWindow{
 
 
     property int connect_count:0
+
     Rectangle{
         id:bground
         x:0
@@ -94,7 +95,7 @@ ApplicationWindow{
                 else
                 {
                     text_connect.text="Disconnected"
-                    screen.text = "       "
+                    screen.text = " "
                     setfunction.stop_serial()
                     connect_count = 0
 
@@ -136,16 +137,17 @@ ApplicationWindow{
             anchors.centerIn: parent
             width: 200;
             height: 150
+            ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
             background: Rectangle {
                 anchors.fill: parent
                 border.color: "gray"
             }
 
-            TextArea {
+            TextEdit {
                 id: screen
                 wrapMode: TextArea.Wrap; selectByMouse: true;
-                font.pixelSize: 10
-                text:  ""
+                font.pixelSize: 14
+                //text:  "  "
             }
         }
 

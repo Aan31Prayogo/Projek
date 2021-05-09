@@ -5,7 +5,7 @@ from PyQt5.QtGui import QGuiApplication
 import sys
 import serial
 import threading
-
+#import multiprocessing 
 
 class SetFunction(QObject):
     __qualname__ = "SetFunction"
@@ -20,37 +20,37 @@ class SetFunction(QObject):
     def serial_read(self):
         global ser
         global stop_thread
-        stop_thread=False
-        ser=serial.Serial("COM6",9600)
         try:
+            stop_thread=False
+            ser=serial.Serial("COM7",9600)
             while 1:
                 line=ser.readline()
-                #print(line)
                 line=line.rstrip()
-                #line=line.decode("utf-8")
+                line=line.decode("utf-8")
                 print("Serial read =",line)
                 self.serialChange.emit(str(line))
                 if stop_thread:
+                    stop_thread=False
+                    ser.close()
                     break
-
         except Exception as e:
-            print("ERROR OCCURED",str(e))
+            print(" SERIAL ERROR OCCURED : " + str(e))
             return False
-        finally:
-            ser.close()
-    
 
     @pyqtSlot()
     def start_serial(self):
+        global t1
         t1=threading.Thread(target=self.serial_read)
         t1.start()
         #t1.join()
     
     @pyqtSlot()
     def stop_serial(self):
+        global t1
         #global ser
         global stop_thread
         stop_thread=True
+      
 
 if __name__=="__main__":
     try:
