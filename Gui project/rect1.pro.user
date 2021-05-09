@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.13.1, 2021-04-25T15:08:38. -->
+<!-- Written by QtCreator 4.13.1, 2021-05-09T13:21:20. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -325,8 +325,9 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/Aan/Documents/rect1/rect1.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/Aan/Documents/rect1/rect1.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">rect12</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:E:/Python Projects/Gui project/rect1.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">E:/Python Projects/Gui project/rect1.pro</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>

@@ -5,6 +5,9 @@ import QtQuick.Window 2.2
 import QtQuick.Controls 2.2
 
 ApplicationWindow{
+    property var com:""
+    property var baudrate:""
+     property int connect_count:0
 
     signal reLine (string str)
     
@@ -37,9 +40,6 @@ ApplicationWindow{
            Qt.Window
     color:"#22303c"
 
-
-    property int connect_count:0
-
     Rectangle{
         id:bground
         x:0
@@ -48,13 +48,60 @@ ApplicationWindow{
         height: 73
         color: "#3c4043"
         Text {
-            x: 10
-            y:15
+            x: 8
+            y:23
             id: bground_text
             text: qsTr("Dashboard")
             font.pixelSize: 24
             color: "#ffffff"
             font.letterSpacing: 2
+        }
+
+        ComboBox {
+            id: comboBox_port
+            x: 162
+            y: 17
+            font.family: "Helvetica"
+            flat: false
+            displayText:currentText
+            editable: false
+            model: ListModel{
+                ListElement{
+               text:"COM6"
+               com:"COM6"
+            }
+            ListElement{
+                text:"COM7"
+                com:"COM7"
+            }
+            ListElement{
+                text:"COM8"
+                com:"COM8"
+            }
+            }
+
+        }
+        ComboBox {
+            id: comboBox_baud
+            x: 329
+            y: 17
+            font.weight: Font.Medium
+            font.family: "Helvetica"
+            displayText:currentText
+            model: ListModel{
+                ListElement{
+                text:"4800"
+                baudrate:"4800"
+            }
+            ListElement{
+                text:"9600"
+                baudrate:"9600"
+            }
+            ListElement{
+                text:"115200"
+                baudrate:"115200"
+            }
+            }
 
         }
     }
@@ -88,7 +135,7 @@ ApplicationWindow{
                 if(connect_count ==1)
                 {
                     text_connect.text="Connected"
-                    setfunction.start_serial()
+                    setfunction.start_serial(com,baudrate)
 
                 }
 
@@ -137,20 +184,19 @@ ApplicationWindow{
             anchors.centerIn: parent
             width: 200;
             height: 150
-            ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+            ScrollBar.vertical.policy: ScrollBar.AlwaysOn
             background: Rectangle {
                 anchors.fill: parent
                 border.color: "gray"
             }
-
             TextEdit {
                 id: screen
-                wrapMode: TextArea.Wrap; selectByMouse: true;
+                wrapMode: TextArea.Wrap
+                selectByMouse: true
                 font.pixelSize: 14
                 //text:  "  "
             }
         }
-
 
 
 
