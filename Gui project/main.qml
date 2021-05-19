@@ -66,22 +66,14 @@ ApplicationWindow{
             flat: false
             displayText:currentText
             editable: false
-          model: ListModel{
-                ListElement{
-               text:"COM6"
-
-            }
-            ListElement{
-                text:"COM7"
-
-            }
-            ListElement{
-                text:"COM8"
-
-            }
-            }
-
+          model: ["COM6", "COM7", "COM8"]
+          onActivated:{
+                //console.log("I clicked item with index " + index + " which has label " + model[index])
+            com=model[index]
+            console.log("COM = ",com)
+          }
         }
+
         ComboBox {
             id: comboBox_baud
             x: 329
@@ -90,19 +82,11 @@ ApplicationWindow{
             font.weight: Font.Medium
             font.family: "Helvetica"
             displayText:currentText
-            model: ListModel{
-                    ListElement{
-                    text:"4800"
-
-                }
-                ListElement{
-                    text:"9600"
-
-                }
-                ListElement{
-                    text:"115200"
-
-                }
+            model: ["9600", "115200"]
+            onActivated:{
+                 // console.log("I clicked item with index " + index + " which has label " + model[index])
+                baudrate=model[index]
+                console.log("baudrate = ",baudrate)
             }
 
         }
@@ -165,7 +149,7 @@ ApplicationWindow{
     ScrollView {
             id: screen_view
             anchors.centerIn: parent
-            width: 200;
+            width: 400
             height: 150
             ScrollBar.vertical.policy: ScrollBar.AlwaysOn
             background: Rectangle {

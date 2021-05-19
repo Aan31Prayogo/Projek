@@ -17,12 +17,14 @@ class SetFunction(QObject):
         print("hai")
 
     #@pyqtSlot()
-    def serial_read(self,COM,baudrate):
+    def serial_read(self,com,baudrate):
         global ser
         global stop_thread
+        baudrate_=int(baudrate)
         try:
             stop_thread=False
-            ser=serial.Serial(COM,baudrate)
+            ser=serial.Serial(com,baudrate_)
+            print("python : SUCCES TO GET SERIAL PORT")
             while 1:
                 line=ser.readline()
                 line=line.rstrip()
@@ -38,9 +40,9 @@ class SetFunction(QObject):
             return False
 
     @pyqtSlot(str,str)
-    def start_serial(self):
+    def start_serial(self,com,baudrate):
         global t1
-        t1=threading.Thread(target=self.serial_read,args=(str,str,))
+        t1=threading.Thread(target=self.serial_read,args=(com,baudrate,))
         t1.start()
         #t1.join()
     
