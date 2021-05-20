@@ -69,8 +69,8 @@ ApplicationWindow{
           model: ["COM6", "COM7", "COM8"]
           onActivated:{
                 //console.log("I clicked item with index " + index + " which has label " + model[index])
-            com=model[index]
-            console.log("COM = ",com)
+                com=model[index]
+                console.log("COM = ",com)
           }
         }
 
@@ -156,18 +156,31 @@ ApplicationWindow{
                 anchors.fill: parent
                 border.color: "gray"
             }
-            TextEdit {
+            // TextEdit {
+            //     id: screen
+            //     property int preContentHeight: 0
+            //     wrapMode: TextArea.Wrap
+            //     selectByMouse: true
+            //     font.pixelSize: 14
+                
+            // }
+            TextArea {
+                width:parent.width
+                height:parent.height
+                //anchors.fill: parent
                 id: screen
-                wrapMode: TextArea.Wrap
-                selectByMouse: true
                 font.pixelSize: 14
-                //text:  "  "
+                property int preContentHeight: 0
+                wrapMode: TextArea.Wrap; selectByMouse: true;
+                onContentHeightChanged: {
+                    //The height of each line is 14, and it will scroll automatically when the input is greater than 3 lines
+                    if(contentHeight > 14 && contentHeight < 28) {
+                        if(contentHeight != preContentHeight) {
+                            preContentHeight = contentHeight;
+                            screen_view.height += 14;
+                        }
+                    }
+                }
             }
         }
-
-
-
-  
-
-
 }

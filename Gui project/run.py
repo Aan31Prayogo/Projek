@@ -52,7 +52,7 @@ class SetFunction(QObject):
         #global ser
         global stop_thread
         stop_thread=True
-      
+        print("Serial Readd Stopped")
 
 if __name__=="__main__":
     try:
