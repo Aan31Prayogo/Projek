@@ -104,7 +104,7 @@ ApplicationWindow{
             font.weight: Font.Medium
             font.family: "Helvetica"
             displayText:currentText
-            model: ["9600", "57600","115200"]
+            model: ["4800","9600", "57600","115200"]
             onActivated:{
                  // console.log("I clicked item with index " + index + " which has label " + model[index])
                 baudrate=model[index]
@@ -139,7 +139,6 @@ ApplicationWindow{
             anchors.fill:parent
             onClicked: {
                 connect_count+=1
-
                 if(connect_count ==1){
                     text_connect.text="Connected"
                     //console.log("TEXT: ", textfield.text)

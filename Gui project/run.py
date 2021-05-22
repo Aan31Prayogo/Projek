@@ -20,13 +20,13 @@ class SetFunction(QObject):
             stop_thread=False
             ser=serial.Serial(com,baudrate_)
             txt_file=open(file,"w")
-            print("python : SUCCES TO GET SERIAL PORT")
-            print("python : Succes to openfile "+str(file))
+            #print("python : SUCCES TO GET SERIAL PORT")
+            #print("python : Succes to openfile "+str(file))
             while 1:
                 line=ser.readline()
                 line=line.rstrip()
                 line=line.decode("utf-8")
-                print("Serial read =",line)
+                #print("Serial read =",line)
                 txt_file.write(line+str("\n"))
                 self.serialChange.emit(str(line))
                 if stop_thread:
@@ -51,7 +51,7 @@ class SetFunction(QObject):
         #global ser
         global stop_thread
         stop_thread=True
-        print("Serial Readd Stopped")
+        #print("Serial Readd Stopped")
 
 if __name__=="__main__":
     try:
