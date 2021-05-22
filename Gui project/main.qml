@@ -48,14 +48,14 @@ ApplicationWindow{
         height: 73
         color: "#3c4043"
         Text {
-            x: 8
+            x: 10
             y:23
             id: bground_text
-            text: qsTr("Dashboard")
+            text: qsTr("Serial Logger")
             font.pixelSize: 18
             //font.wordSpacing: 0
-            color: "whitesmoke"
-            font.letterSpacing: 4
+            color: "azure"
+            font.letterSpacing: 3
        }
 
         Text {
@@ -202,4 +202,37 @@ ApplicationWindow{
                 }
             }
         }
+
+    Text {
+        id: txt_text
+        x:450
+        y:130
+        font.pixelSize: 12
+        color: "whitesmoke"
+        text: qsTr("File Name :")
+        font.letterSpacing: 2
+    }
+    Text {
+        id: txt_ex
+        x:450
+        y:185
+        font.pixelSize: 10
+        color: "whitesmoke"
+        text: qsTr("example : \"file.txt\"")
+        font.letterSpacing: 1
+    }
+    Rectangle{
+        id:box_txt
+        x:450
+        y:150
+        width: 150
+        height: 30
+        color: "whitesmoke"
+        TextArea{
+            width: parent.width
+            height: parent.height
+
+        }
+    }
+
 }

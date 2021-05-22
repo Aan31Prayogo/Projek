@@ -49,6 +49,13 @@ class SetFunction(QObject):
         stop_thread=True
         print("Serial Readd Stopped")
 
+    def make_txt_file(self,file,data):
+        try:
+            txt_file=open(file,"w")
+            txt_file.write(data)
+        except Exception as e:
+            print("Failed t make txt file : "+ str(e))
+            
 if __name__=="__main__":
     try:
         app=QGuiApplication(sys.argv)
