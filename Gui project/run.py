@@ -12,32 +12,36 @@ class SetFunction(QObject):
     serialChange= pyqtSignal(str)
 
     #@pyqtSlot()
-    def serial_read(self,com,baudrate):
+    def serial_read(self,com,baudrate,file):
         global ser
         global stop_thread
         baudrate_=int(baudrate)
         try:
             stop_thread=False
             ser=serial.Serial(com,baudrate_)
+            txt_file=open(file,"w")
             print("python : SUCCES TO GET SERIAL PORT")
+            print("python : Succes to openfile "+str(file))
             while 1:
                 line=ser.readline()
                 line=line.rstrip()
                 line=line.decode("utf-8")
                 print("Serial read =",line)
+                txt_file.write(line+str("\n"))
                 self.serialChange.emit(str(line))
                 if stop_thread:
                     stop_thread=False
                     ser.close()
+                    txt_file.close()
                     break
         except Exception as e:
             print(" SERIAL ERROR OCCURED : " + str(e))
             return False
 
-    @pyqtSlot(str,str)
-    def start_serial(self,com,baudrate):
+    @pyqtSlot(str,str,str)
+    def start_serial(self,com,baudrate,file):
         global t1
-        t1=threading.Thread(target=self.serial_read,args=(com,baudrate,))
+        t1=threading.Thread(target=self.serial_read,args=(com,baudrate,file,))
         t1.start()
         #t1.join()
     
@@ -49,13 +53,6 @@ class SetFunction(QObject):
         stop_thread=True
         print("Serial Readd Stopped")
 
-    def make_txt_file(self,file,data):
-        try:
-            txt_file=open(file,"w")
-            txt_file.write(data)
-        except Exception as e:
-            print("Failed t make txt file : "+ str(e))
-            
 if __name__=="__main__":
     try:
         app=QGuiApplication(sys.argv)

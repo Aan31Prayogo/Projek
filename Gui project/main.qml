@@ -8,6 +8,8 @@ ApplicationWindow{
     property var com:""
     property var baudrate:""
     property int connect_count:0
+    property var serial_data:""
+    property  var txt_file:""
 
     signal reLine (string str)
     
@@ -22,8 +24,10 @@ ApplicationWindow{
     Connections{
         target: root
         function onReLine(str)
-        {
+        {   
             screen.append(str)
+            //serial_data=str
+            //console.log(serial_data)            
         }
     }
 
@@ -136,17 +140,15 @@ ApplicationWindow{
             onClicked: {
                 connect_count+=1
 
-                if(connect_count ==1)
-                {
+                if(connect_count ==1){
                     text_connect.text="Connected"
-                    setfunction.start_serial(com,baudrate)
-
+                    //console.log("TEXT: ", textfield.text)
+                    txt_file=textfield.text
+                    setfunction.start_serial(com,baudrate,txt_file)
                 }
-
-                else
-                {
+                else{
                     text_connect.text="Disconnected"
-                    screen.text = " "
+                    //screen.text = " "
                     setfunction.stop_serial()
                     connect_count = 0
 
@@ -228,10 +230,12 @@ ApplicationWindow{
         width: 150
         height: 30
         color: "whitesmoke"
-        TextArea{
+        TextField {
+            id:textfield
             width: parent.width
             height: parent.height
-
+            placeholderText: qsTr("Enter file name")
+            text:""
         }
     }
 
