@@ -220,7 +220,7 @@ ApplicationWindow{
         y:185
         font.pixelSize: 10
         color: "whitesmoke"
-        text: qsTr("example : \"file.txt\"")
+        text: qsTr("example : file.txt")
         font.letterSpacing: 1
     }
     Rectangle{
