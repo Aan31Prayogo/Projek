@@ -5,16 +5,11 @@ from PyQt5.QtGui import QGuiApplication
 import sys
 import serial
 import threading
-#import multiprocessing 
 
 class SetFunction(QObject):
     __qualname__ = "SetFunction"
     
     serialChange= pyqtSignal(str)
-
-    @pyqtSlot()
-    def say(self):
-        print("hai")
 
     #@pyqtSlot()
     def serial_read(self,com,baudrate):

@@ -29,7 +29,7 @@ ApplicationWindow{
 
 
     id:root
-    x:600
+    x:300
     y:200
     width: 640
     height: 480
@@ -41,7 +41,7 @@ ApplicationWindow{
     color:"#22303c"
 
     Rectangle{
-        id:bground
+        id:header_
         x:0
         y:0
         width: root.width
@@ -52,37 +52,55 @@ ApplicationWindow{
             y:23
             id: bground_text
             text: qsTr("Dashboard")
-            font.pixelSize: 24
-            font.wordSpacing: 0
-            color: "#ffffff"
-            font.letterSpacing: 2
+            font.pixelSize: 18
+            //font.wordSpacing: 0
+            color: "whitesmoke"
+            font.letterSpacing: 4
        }
+
+        Text {
+            id: port_text
+            text: qsTr("Port:")
+            font.pixelSize: 12
+            color: "whitesmoke"
+            x:162
+            y:2
+            font.letterSpacing: 2
+        }
 
         ComboBox {
             id: comboBox_port
             x: 162
-            y: 17
+            y: 20
             font.family: "Helvetica"
             flat: false
             displayText:currentText
             editable: false
-          model: ["COM6", "COM7", "COM8"]
-          onActivated:{
+            model: ["COM6", "COM7", "COM8"]
+            onActivated:{
                 //console.log("I clicked item with index " + index + " which has label " + model[index])
                 com=model[index]
                 console.log("COM = ",com)
-          }
+            }
         }
-
+        Text {
+            id: baud_text
+            text: qsTr("Baudrate:")
+            font.pixelSize: 12
+            color: "whitesmoke"
+            x:329
+            y:2
+            font.letterSpacing: 2
+        }
         ComboBox {
             id: comboBox_baud
             x: 329
-            y: 17
+            y: 20
             enabled: true
             font.weight: Font.Medium
             font.family: "Helvetica"
             displayText:currentText
-            model: ["9600", "115200"]
+            model: ["9600", "57600","115200"]
             onActivated:{
                  // console.log("I clicked item with index " + index + " which has label " + model[index])
                 baudrate=model[index]
@@ -98,7 +116,7 @@ ApplicationWindow{
         width:144
         height:50
         anchors.top:parent.top
-        anchors.topMargin: 10
+        anchors.topMargin: 15
         anchors.right: parent.right
         anchors.rightMargin: 10
         color: "#1d3752"
@@ -145,25 +163,26 @@ ApplicationWindow{
         }
     }
 
-
+    Text {
+        id: screnn_text
+        x:10
+        y:120
+        font.pixelSize: 14
+        color: "whitesmoke"
+        text: qsTr("Serial Screen")
+        font.letterSpacing: 2
+    }
     ScrollView {
             id: screen_view
-            anchors.centerIn: parent
+            x:10
+            y:150
             width: 400
-            height: 150
+            height: 200
             ScrollBar.vertical.policy: ScrollBar.AlwaysOn
             background: Rectangle {
                 anchors.fill: parent
                 border.color: "gray"
             }
-            // TextEdit {
-            //     id: screen
-            //     property int preContentHeight: 0
-            //     wrapMode: TextArea.Wrap
-            //     selectByMouse: true
-            //     font.pixelSize: 14
-                
-            // }
             TextArea {
                 width:parent.width
                 height:parent.height
